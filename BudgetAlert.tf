@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "budget-rg" {
 resource "azurerm_monitor_action_group" "Budgetag1" {
   name                = var.budget_action_group_name1
   resource_group_name = var.budget_resource_group_name
-  short_name          = var.budget_action_group_name1_hort_name
+  short_name          = var.budget_action_group_name1_short_name
   tags                = var.tags
   depends_on          = [azurerm_resource_group.budget-rg]
 }
