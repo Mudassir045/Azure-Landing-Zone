@@ -54,7 +54,7 @@ variable "budget_action_group_name1" {
   default = "Budgetag1"
 }
 
-variable "budget_action_group_name1_hort_name" {
+variable "budget_action_group_name1_short_name" {
   type    = string
   default = "Budgetag1"
 }
