@@ -3,6 +3,7 @@ resource "azurerm_network_interface" "DEV-VM-001-nic" {
   name                = "DEV-VM-001-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
+  tags                = var.tags
 
   ip_configuration {
     name                          = "internal"
@@ -17,6 +18,7 @@ resource "azurerm_windows_virtual_machine" "DEV-VM-001" {
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = "Standard_F2"
+  tags                = var.tags
   admin_username      = var.admin_username
   admin_password      = var.admin_password
   network_interface_ids = [
