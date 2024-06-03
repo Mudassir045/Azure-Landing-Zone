@@ -20,7 +20,6 @@ resource "azurerm_subnet" "DEV-Subnet-01" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
   address_prefixes     = ["10.0.0.0/24"]
-  tags                 = var.tags
   depends_on = [
     azurerm_virtual_network.DEV-VNET-01
   ]
