@@ -1,7 +1,7 @@
 resource "azurerm_resource_group" "DEV-RG-01" {
   name     = var.resource_group_name
   location = var.location
-}
+  tags     = var.tags
 
 resource "azurerm_virtual_network" "DEV-VNET-01" {
   name                = var.virtual_network_name
