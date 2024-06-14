@@ -1,5 +1,3 @@
-data "azurerm_subscription" "current" {}
-
 resource "azurerm_resource_group" "budget-rg" {
   name     = var.budget_resource_group_name
   location = var.location
