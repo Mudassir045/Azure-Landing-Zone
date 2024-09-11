@@ -1,5 +1,3 @@
-data "azurerm_subscription" "current" {}
-
 resource "azurerm_resource_group" "budget-rg" {
   name     = var.budget_resource_group_name
   location = var.location
@@ -16,7 +14,7 @@ resource "azurerm_monitor_action_group" "Budgetag1" {
 
 resource "azurerm_consumption_budget_subscription" "budgetalert" {
   name            = var.Subscription_budget_alert_name
-  subscription_id = var.subscription_id
+  subscription_id = data.azurerm_subscription.current.id
 
   amount     = var.budget_alert_amount
   time_grain = var.budget_alert_time_grain
@@ -34,22 +32,36 @@ resource "azurerm_consumption_budget_subscription" "budgetalert" {
     contact_emails = var.contact_emails
   }
 
+  notification {
+    enabled   = var.budget_notification_enabled
+    threshold = 50
+    operator  = var.budget_notification_operator
 
-  #   notification {
-  #     enabled   = true
-  #     threshold = 90.0
-  #     operator  = "EqualTo"
+    contact_emails = var.contact_emails
+  }
 
-  #     contact_emails = var.ontact_emails
-  #   }
+  notification {
+    enabled   = var.budget_notification_enabled
+    threshold = 75
+    operator  = var.budget_notification_operator
 
+    contact_emails = var.contact_emails
+  }
 
-  #   notification {
-  #     enabled        = false
-  #     threshold      = 100.0
-  #     operator       = "GreaterThan"
-  #     threshold_type = "Forecasted"
+  notification {
+    enabled   = true
+    threshold = 90.0
+    operator  = "EqualTo"
 
-  #     contact_emails = var.ontact_emails
-  #   }
+    contact_emails = var.contact_emails
+  }
+
+  notification {
+    enabled        = false
+    threshold      = 100.0
+    operator       = "GreaterThan"
+    threshold_type = "Forecasted"
+
+    contact_emails = var.contact_emails
+  }
 }

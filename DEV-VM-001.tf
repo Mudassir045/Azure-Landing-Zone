@@ -1,4 +1,3 @@
-
 resource "azurerm_network_interface" "DEV-VM-001-nic" {
   name                = "DEV-VM-001-nic"
   location            = var.location
@@ -36,6 +35,5 @@ resource "azurerm_windows_virtual_machine" "DEV-VM-001" {
     sku       = "2022-Datacenter"
     version   = "latest"
   }
-  depends_on = [azurerm_network_interface.DEV-VM-001-nic,
-  azurerm_resource_group.DEV-RG-01]
-}
+  depends_on = [ azurerm_network_interface.DEV-VM-001-nic ]
+  }
