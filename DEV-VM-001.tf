@@ -35,5 +35,5 @@ resource "azurerm_windows_virtual_machine" "DEV-VM-001" {
     sku       = "2022-Datacenter"
     version   = "latest"
   }
-  depends_on = [ azurerm_network_interface.DEV-VM-001-nic ]
-  }
+  depends_on = [azurerm_network_interface.DEV-VM-001-nic]
+}

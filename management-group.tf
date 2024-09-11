@@ -37,6 +37,28 @@ resource "azurerm_management_group_policy_assignment" "Defender" {
   }
 }
 
+data "azurerm_policy_definition" "LAW-Aotomation" {
+  display_name = "Configure Log Analytics workspace and automation account to centralize logs and monitoring"
+}
+
+resource "azurerm_management_group_policy_assignment" "LAW-Automation" {
+  name                 = "LAW-Automation"
+  policy_definition_id = data.azurerm_policy_definition.LAW-Aotomation.id
+  management_group_id  = azurerm_management_group.DEV-MG.id
+  location             = var.location
+  identity {
+    type = "SystemAssigned"
+  }
+  parameters = jsonencode({
+    workspaceRegion = {
+      value = "Central India"
+    }
+    automationRegion = {
+      value = "Central India"
+    }
+  })
+}
+
 data "azurerm_policy_definition" "Allowed-Locations" {
   display_name = "Allowed locations"
 }
