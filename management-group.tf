@@ -62,6 +62,7 @@ resource "azurerm_management_group_policy_assignment" "LAW-Automation" {
 data "azurerm_policy_definition" "Allowed-Locations" {
   display_name = "Allowed locations"
 }
+
 resource "azurerm_management_group_policy_assignment" "Allowed-locations" {
   name                 = "Allowed-locations"
   management_group_id  = azurerm_management_group.DEV-MG.id
@@ -84,6 +85,29 @@ resource "azurerm_management_group_policy_assignment" "Allowed-SKUs" {
   parameters = jsonencode({
     "listOfAllowedSKUs" = {
       "value" = ["Standard_D4s_v5", "Standard_D4as_v5", "Standard_F2"]
+    }
+  })
+}
+
+data "azurerm_policy_set_definition" "AMA" {
+  display_name = "Enable Azure Monitor for VMs with Azure Monitoring Agent(AMA)"
+}
+
+resource "azurerm_management_group_policy_assignment" "AMA" {
+  name                 = "MonitorForVMs with (AMA)"
+  policy_definition_id = data.azurerm_policy_set_definition.AMA.id
+  management_group_id  = azurerm_management_group.DEV-MG.id
+
+  location = var.location
+  identity {
+    type = "SystemAssigned"
+  }
+  parameters = jsonencode({
+    bringYourOwnUserAssignedManagedIdentity = {
+      value = false
+    }
+    dcrResourceId = {
+      value = "false" #"/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Insights/dataCollectionRules/<dcr-name>"
     }
   })
 }

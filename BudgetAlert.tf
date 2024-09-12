@@ -51,7 +51,7 @@ resource "azurerm_consumption_budget_subscription" "budgetalert" {
   notification {
     enabled   = true
     threshold = 90.0
-    operator  = "EqualTo"
+    operator  = var.budget_notification_operator
 
     contact_emails = var.contact_emails
   }

@@ -7,11 +7,12 @@ variable "policy_display_names" {
     "Network Watcher should be enabled",
     "Management ports should be closed on your virtual machines",
     "Auto provisioning of the Log Analytics agent should be enabled on your subscription",
-    #"Enable Azure Monitor for VMs with Azure Monitoring Agent(AMA)",
     "Audit usage of custom RBAC roles",
     "A maximum of 3 owners should be designated for your subscription",
     #"Enable Microsoft Defender for Cloud on your subscription",
-    #"Configure Log Analytics workspace and automation account to centralize logs and monitoring"
+    #"Configure Log Analytics workspace and automation account to centralize logs and monitoring",
+    #"Allowed virtual machine size SKUs", #"Allowed locations"
+    #"Enable Azure Monitor for VMs with Azure Monitoring Agent(AMA)"
   ]
 }
 
